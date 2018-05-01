@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es5",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "typeRoots": ["./node_modules/@types"],
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "paths": {
+      "lib/*": ["src/lib/*"],
+      "constants/*": ["src/lib/constants/*"],
+      "components/*": ["src/components/*"],
+      "containers/*": ["src/containers/*"],
+      "pages/*": ["src/pages/*"],
+      "assets/*": ["assets/*", "assets/fonts/*"]
+    },
+    "jsx": "react",
+    "lib": ["es5", "es6", "es7", "esnext", "dom"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
