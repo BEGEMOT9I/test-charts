@@ -1,7 +1,7 @@
 import React, { PureComponent, ChangeEvent } from 'react'
 import { PieChart, Pie, Legend, LegendType } from 'recharts'
 
-import Data, { Dataset } from '../../data'
+import Data, { Dataset } from 'src/data'
 
 interface Props {
   width: number

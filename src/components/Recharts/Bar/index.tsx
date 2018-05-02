@@ -1,7 +1,7 @@
 import React, { PureComponent, ChangeEvent } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from 'recharts'
 
-import Data, { Dataset } from '../../data'
+import Data, { Dataset } from 'src/data'
 
 interface Props {
   width: number
@@ -23,7 +23,7 @@ class Chart extends PureComponent<Props, State> {
     })
 
     return (
-      <LineChart
+      <BarChart
         width={width}
         height={height}
         data={formattedDatasets}
@@ -33,10 +33,10 @@ class Chart extends PureComponent<Props, State> {
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
         {datasets.map((dataset, index) => (
-          <Line key={dataset.name} type="monotone" dataKey={dataset.name} stroke={dataset.color} />
+          <Bar key={dataset.name} dataKey={dataset.name} fill={dataset.color} />
         ))}
         <Legend />
-      </LineChart>
+      </BarChart>
     )
   }
 }
