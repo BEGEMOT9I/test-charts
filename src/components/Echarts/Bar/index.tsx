@@ -7,7 +7,7 @@ import 'echarts/lib/component/legendScroll'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/toolbox'
 
-import Data, { Dataset } from 'src/data'
+import Data, { Dataset } from '../../../data'
 
 interface Props {
   width: number

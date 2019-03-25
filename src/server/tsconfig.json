@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": ["dom", "es2017"],
+    "maxNodeModuleJsDepth": 5,
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "esnext"
+  },
+  "exclude": ["node_modules"]
+}

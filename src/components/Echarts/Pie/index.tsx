@@ -6,7 +6,7 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legendScroll'
 import 'echarts/lib/component/toolbox'
 
-import Data, { Dataset } from 'src/data'
+import Data, { Dataset } from '../../../data'
 
 interface Props {
   width: number
@@ -18,8 +18,9 @@ interface State {}
 class Chart extends PureComponent<Props, State> {
   public render() {
     const { width, height, datasets } = this.props
-    let radius = 30
-    let padding = 10
+    const size = Math.min(width, height)
+    const padding = Math.max(size / datasets.length * 0.1, 1)
+    const radius = (size / 2 - padding * (datasets.length - 1)) / datasets.length
 
     return (
       <ReactEchartsCore
