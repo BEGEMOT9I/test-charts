@@ -1,24 +1,23 @@
-import React, { PureComponent, ChangeEvent } from 'react'
+import React, { PureComponent } from 'react'
 import ReactEchartsCore from 'echarts-for-react/lib/core'
 import echarts from 'echarts/lib/echarts'
 import 'echarts/lib/chart/bar'
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legendScroll'
 import 'echarts/lib/component/grid'
-import 'echarts/lib/component/toolbox'
 
-import Data, { Dataset } from '../../../data'
+import { FormattedDataset } from '../../../lib/services/data'
 
 interface Props {
   width: number
   height: number
-  datasets: Array<Dataset>
+  dataset: FormattedDataset
 }
-interface State {}
+interface State { }
 
-class Chart extends PureComponent<Props, State> {
+class BarChart extends PureComponent<Props, State> {
   public render() {
-    const { width, height, datasets } = this.props
+    const { width, height, dataset } = this.props
 
     return (
       <ReactEchartsCore
@@ -29,18 +28,8 @@ class Chart extends PureComponent<Props, State> {
             trigger: 'axis'
           },
           legend: {
-            type: 'scroll',
-            data: datasets.map(dataset => dataset.name)
+            type: 'scroll'
           },
-          toolbox: {
-            show: true,
-            feature: {
-              dataView: { readOnly: false },
-              restore: {},
-              saveAsImage: {}
-            }
-          },
-          color: datasets.map(dataset => dataset.color),
           grid: {
             top: 60,
             left: 40,
@@ -48,44 +37,17 @@ class Chart extends PureComponent<Props, State> {
             bottom: 30
           },
           xAxis: [
-            {
-              type: 'category',
-              name: 'Месяц',
-              boundaryGap: true,
-              data: Data.columns
-            }
+            { type: 'category' },
           ],
-          yAxis: [
-            {
-              type: 'value',
-              scale: true,
-              name: 'Данные',
-              max: 1000,
-              min: 0,
-              boundaryGap: [0.2, 0.2]
-            }
-          ],
-          series: datasets.map(dataset => ({
-            name: dataset.name,
-            type: 'bar',
-            itemStyle: {
-              normal: {
-                barBorderRadius: 4
-              }
-            },
-            animationEasing: 'elasticOut',
-            animationDelay: function(idx: number) {
-              return idx * 10
-            },
-            animationDelayUpdate: function(idx: number) {
-              return idx * 10
-            },
-            data: dataset.data
-          }))
+          yAxis: {},
+          dataset: {
+            source: dataset
+          },
+          series: dataset.slice(1, dataset.length).map(() => ({ type: 'bar', seriesLayoutBy: 'row' }))
         }}
       />
     )
   }
 }
 
-export default Chart
+export default BarChart

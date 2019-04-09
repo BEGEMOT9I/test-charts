@@ -1,7 +1,7 @@
 import React, { PureComponent, ChangeEvent, MouseEvent } from 'react'
 import { saveSvgAsPng } from 'save-svg-as-png'
 
-import Data, { Dataset } from '../../data'
+import DataService, { FormattedDataset } from '../../lib/services/data'
 import EchartsPie from 'components/Echarts/Pie'
 import EchartsLine from 'components/Echarts/Line'
 import EchartsBar from 'components/Echarts/Bar'
@@ -11,7 +11,7 @@ interface Props {}
 interface State {
   width: number
   height: number
-  datasets: Array<Dataset>
+  dataset: FormattedDataset
 }
 
 class App extends PureComponent<Props, State> {
@@ -21,36 +21,39 @@ class App extends PureComponent<Props, State> {
     this.state = {
       width: document.body.offsetWidth,
       height: 400,
-      datasets: [Data.generateDataset()]
+      dataset: []
     }
   }
 
   public componentDidMount() {
+    this.getDataset()
     window.addEventListener('resize', this.resize)
-  }
-
-  private addDataset = () => {
-    this.setState({ datasets: [...this.state.datasets, Data.generateDataset()] })
   }
 
   private resize = () => {
     this.setState({ width: document.body.offsetWidth })
   }
 
+  private async getDataset() {
+    const dataset = await DataService.getDataset({ seriesCount: 2, levelsDataCount: [10, 10] })
+    console.log(dataset)
+    this.setState({ dataset })
+  }
+
   public render() {
-    const { width, height, datasets } = this.state
+    const { width, height, dataset } = this.state
 
     return (
       <div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div>
             <button onClick={this.addDataset}>Добавить датасет</button>
           </div>
-        </div>
+        </div> */}
         <div id="chart" style={{ overflow: 'hidden', marginTop: 20 }}>
-          <EchartsLine width={width} height={height} datasets={datasets} />
-          <EchartsBar width={width} height={height} datasets={datasets} />
-          <EchartsPie width={width} height={height} datasets={datasets} />
+          <EchartsLine width={width} height={height} dataset={dataset} />
+          <EchartsBar width={width} height={height} dataset={dataset} />
+          <EchartsPie width={width} height={height} dataset={dataset} />
         </div>
       </div>
     )

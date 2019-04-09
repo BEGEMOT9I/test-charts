@@ -13,7 +13,7 @@ function createNestedSeria(dataset: FlatDatasetWithoutLabels<number>, series: Se
     return result + index
   }, 0)
 
-  dataset.push(levels[level].labels.map((label, index) => Math.sin(valueBasedOnParentArray + index)))
+  dataset.push(levels[level].labels.map((label, index) => Math.abs(Math.sin(valueBasedOnParentArray + index))))
 }
 
 export default function (series: Series, levels: Levels): FlatDatasetWithoutLabels<number> {

@@ -6,21 +6,21 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legendScroll'
 import 'echarts/lib/component/toolbox'
 
-import Data, { Dataset } from '../../../data'
+import { FormattedDataset } from '../../../lib/services/data'
 
 interface Props {
   width: number
   height: number
-  datasets: Array<Dataset>
+  dataset: FormattedDataset
 }
-interface State {}
+interface State { }
 
-class Chart extends PureComponent<Props, State> {
+class PieChart extends PureComponent<Props, State> {
   public render() {
-    const { width, height, datasets } = this.props
+    const { width, height, dataset } = this.props
     const size = Math.min(width, height)
-    const padding = Math.max(size / datasets.length * 0.1, 1)
-    const radius = (size / 2 - padding * (datasets.length - 1)) / datasets.length
+    const padding = Math.max(size / (dataset.length - 1) * 0.1, 1)
+    const radius = (size / 2 - padding * (dataset.length - 2)) / (dataset.length - 1)
 
     return (
       <ReactEchartsCore
@@ -32,34 +32,22 @@ class Chart extends PureComponent<Props, State> {
           },
           legend: {
             type: 'scroll',
-            data: datasets.map(dataset => dataset.name)
+            data: dataset.length ? dataset[0].map(label => ({
+              name: label,
+              icon: 'circle'
+            })) : []
           },
-          toolbox: {
-            show: true,
-            feature: {
-              dataView: { readOnly: false },
-              restore: {},
-              saveAsImage: {}
-            }
-          },
-          series: datasets.map((dataset, index) => ({
-            name: dataset.name,
+          series: dataset.slice(1, dataset.length).map((seria, index) => ({
+            name: seria[0],
             type: 'pie',
-            itemStyle: {
-              color: dataset.color
-            },
             label: {
               show: false
             },
             radius: [index * (padding + radius), index * (padding + radius) + radius],
-            animationEasing: 'elasticOut',
-            animationDelay: function(idx: number) {
-              return idx * 10
-            },
-            animationDelayUpdate: function(idx: number) {
-              return idx * 10
-            },
-            data: dataset.data
+            data: seria.slice(1, seria.length).map((value, valueIndex, array) => ({
+              value,
+              name: dataset[0][dataset[0].length - array.length + valueIndex]
+            }))
           }))
         }}
       />
@@ -67,4 +55,4 @@ class Chart extends PureComponent<Props, State> {
   }
 }
 
-export default Chart
+export default PieChart
