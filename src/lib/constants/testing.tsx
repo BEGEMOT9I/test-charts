@@ -1,8 +1,6 @@
-import EchartsPie from 'components/Echarts/Pie'
-import EchartsLine from 'components/Echarts/Line'
-import EchartsBar from 'components/Echarts/Bar'
+import { LineChart, BarChart, PieChart } from 'components/Charts'
 
-const ELEMENTS = [EchartsLine, EchartsBar, EchartsPie]
+const ELEMENTS = [LineChart, BarChart, PieChart]
 
 const STAGES_OPTIONS = [
   { seriesCount: 1, levelsDataCount: [1] },
@@ -18,13 +16,13 @@ const STAGES_OPTIONS = [
 ]
 
 const STAGES = [{
-  element: EchartsLine,
+  element: LineChart,
   substages: STAGES_OPTIONS
 }, {
-  element: EchartsBar,
+  element: BarChart,
   substages: STAGES_OPTIONS
 }, {
-  element: EchartsPie,
+  element: PieChart,
   substages: STAGES_OPTIONS.filter(options => options.levelsDataCount.every(count => count < 1000) && options.seriesCount < 1000)
 }]
 
