@@ -1,7 +1,18 @@
 # Testing charts libraries.
 
-## List of libs:
-- [x] Echarts (react components)
+## List of included libs:
+- [x] Echarts (with React adapter)
+- [ ] Chart.js
+- [ ] tauCharts
+- [ ] react-vis (React)
+- [ ] Victory (React)
+- [ ] AnyChart (with React adapter)
+- [ ] plotly.js (with React adapter)
+- [ ] amCharts
+- [ ] c3
+- [ ] Highcharts (with React adapter)
+- [ ] TOAST UI Chart
+- [ ] Plottable
 
 ## Local testing:
 - `git checkout <library name>`
