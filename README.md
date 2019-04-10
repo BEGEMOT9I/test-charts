@@ -1,9 +1,6 @@
-# Testing charts libraries.
+# Echarts library testing.
 
-## List of libs:
-- [x] Recharts
-- [x] Echarts (react components)
-
-## Local testing:
-- yarn install
-- yarn start
+## List of charts:
+- Line
+- Bar
+- Pie
