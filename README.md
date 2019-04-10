@@ -7,3 +7,4 @@
 - `git checkout <library name>`
 - `yarn install`
 - `yarn start`
+- Open the [`localhost:3000`](http://0.0.0.0:3000)
