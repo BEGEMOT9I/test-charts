@@ -1,17 +1,11 @@
-import React, { PureComponent, ChangeEvent, MouseEvent } from 'react'
-import { saveSvgAsPng } from 'save-svg-as-png'
+import React, { PureComponent } from 'react'
 
-import DataService, { FormattedDataset } from '../../lib/services/data'
-import EchartsPie from 'components/Echarts/Pie'
-import EchartsLine from 'components/Echarts/Line'
-import EchartsBar from 'components/Echarts/Bar'
-import Table from 'components/Table'
+import Test from 'components/Test'
 
 interface Props {}
 interface State {
   width: number
   height: number
-  dataset: FormattedDataset
 }
 
 class App extends PureComponent<Props, State> {
@@ -20,13 +14,11 @@ class App extends PureComponent<Props, State> {
 
     this.state = {
       width: document.body.offsetWidth,
-      height: 400,
-      dataset: []
+      height: 400
     }
   }
 
   public componentDidMount() {
-    this.getDataset()
     window.addEventListener('resize', this.resize)
   }
 
@@ -34,27 +26,12 @@ class App extends PureComponent<Props, State> {
     this.setState({ width: document.body.offsetWidth })
   }
 
-  private async getDataset() {
-    const dataset = await DataService.getDataset({ seriesCount: 2, levelsDataCount: [10, 10] })
-    console.log(dataset)
-    this.setState({ dataset })
-  }
-
   public render() {
-    const { width, height, dataset } = this.state
+    const { width, height } = this.state
 
     return (
-      <div>
-        {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div>
-            <button onClick={this.addDataset}>Добавить датасет</button>
-          </div>
-        </div> */}
-        <div id="chart" style={{ overflow: 'hidden', marginTop: 20 }}>
-          <EchartsLine width={width} height={height} dataset={dataset} />
-          <EchartsBar width={width} height={height} dataset={dataset} />
-          <EchartsPie width={width} height={height} dataset={dataset} />
-        </div>
+      <div id="chart" style={{ overflow: 'hidden', marginTop: 20 }}>
+        <Test width={width} height={height}/>
       </div>
     )
   }

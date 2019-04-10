@@ -15,7 +15,7 @@ function createNestedSeria(dataset: Array<Array<number | string>>, parentArray: 
     }, 0)
 
     for (let i = 0; i < levelDataCount; i += 1) {
-      parentArray.push(Math.sin(valueBasedOnParentArray + i))
+      parentArray.push(Math.abs(Math.sin(valueBasedOnParentArray + i)))
     }
     dataset.push(parentArray)
   }

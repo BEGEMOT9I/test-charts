@@ -12,12 +12,22 @@ interface Props {
   width: number
   height: number
   dataset: FormattedDataset
+  onStartedRendering: () => void
+  onFinishedRendering: () => void
 }
 interface State { }
 
 class LineChart extends PureComponent<Props, State> {
+  public static displayName = 'LineChart'
+
+  constructor(props: Props) {
+    super(props)
+
+    props.onStartedRendering()
+  }
+
   public render() {
-    const { width, height, dataset } = this.props
+    const { width, height, dataset, onFinishedRendering } = this.props
 
     return (
       <ReactEchartsCore
@@ -43,7 +53,11 @@ class LineChart extends PureComponent<Props, State> {
           dataset: {
             source: dataset
           },
-          series: dataset.slice(1, dataset.length).map(() => ({ type: 'line', seriesLayoutBy: 'row' }))
+          series: dataset.slice(1, dataset.length).map(() => ({ type: 'line', seriesLayoutBy: 'row' })),
+          animation: false
+        }}
+        onEvents={{
+          finished: onFinishedRendering
         }}
       />
     )

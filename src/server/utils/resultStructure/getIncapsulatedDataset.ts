@@ -12,7 +12,7 @@ function createNestedSeria(series: Series, levels: Levels, level: number, labels
     return result + index
   }, 0)
 
-  return levels[level].labels.map((label, index) => Math.sin(valueBasedOnParentArray + index))
+  return levels[level].labels.map((label, index) => Math.abs(Math.sin(valueBasedOnParentArray + index)))
 }
 
 export default function (series: Series, levels: Levels): IncapsulatedDataset<number> {

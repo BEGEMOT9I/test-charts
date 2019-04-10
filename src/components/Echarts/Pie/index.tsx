@@ -12,12 +12,22 @@ interface Props {
   width: number
   height: number
   dataset: FormattedDataset
+  onStartedRendering: () => void
+  onFinishedRendering: () => void
 }
 interface State { }
 
 class PieChart extends PureComponent<Props, State> {
+  public static displayName = 'PieChart'
+
+  constructor(props: Props) {
+    super(props)
+
+    props.onStartedRendering()
+  }
+
   public render() {
-    const { width, height, dataset } = this.props
+    const { width, height, dataset, onFinishedRendering } = this.props
     const size = Math.min(width, height)
     const padding = Math.max(size / (dataset.length - 1) * 0.1, 1)
     const radius = (size / 2 - padding * (dataset.length - 2)) / (dataset.length - 1)
@@ -48,7 +58,11 @@ class PieChart extends PureComponent<Props, State> {
               value,
               name: dataset[0][dataset[0].length - array.length + valueIndex]
             }))
-          }))
+          })),
+          animation: false
+        }}
+        onEvents={{
+          finished: onFinishedRendering
         }}
       />
     )
