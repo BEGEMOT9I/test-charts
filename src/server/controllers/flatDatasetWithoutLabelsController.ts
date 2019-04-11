@@ -1,11 +1,18 @@
 import * as express from 'express'
 
-import { getLevels, getSeries, getFlatDatasetWithoutLabels, Result, FlatDatasetWithoutLabels } from '../utils/resultStructure'
+import {
+  getLevels,
+  getSeries,
+  getFlatDatasetWithoutLabels,
+  Result,
+  FlatDatasetWithoutLabels
+} from '../utils/resultStructure'
 
 function flatDatasetWithoutLabelsController(req: express.Request, res: express.Response) {
   try {
     const {
-      seriesCount = 1, levelsDataCount = [1, 1]
+      seriesCount = 1,
+      levelsDataCount = [1, 1]
     }: {
       seriesCount: number
       levelsDataCount: number[]

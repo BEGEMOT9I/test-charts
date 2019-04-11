@@ -10,7 +10,7 @@ interface Props {
   onStartedRendering: () => void
   onFinishedRendering: () => void
 }
-interface State { }
+interface State {}
 
 class BarChart extends PureComponent<Props, State> {
   public static displayName = 'BarChart'
@@ -27,8 +27,8 @@ class BarChart extends PureComponent<Props, State> {
     const chart = new Chart(this.canvas.current, {
       type: 'bar',
       data: {
-        labels: dataset.length ? dataset[0].slice(1, dataset[0].length) as Array<string> : [],
-        datasets: dataset.slice(1, dataset.length).map((seria) => {
+        labels: dataset.length ? (dataset[0].slice(1, dataset[0].length) as Array<string>) : [],
+        datasets: dataset.slice(1, dataset.length).map(seria => {
           const color = `#${Math.random()
             .toString(16)
             .substr(-6)}`
@@ -45,7 +45,7 @@ class BarChart extends PureComponent<Props, State> {
         animation: {
           duration: 0, // general animation time
           onComplete: onFinishedRendering
-        },
+        }
       }
     })
   }
@@ -53,9 +53,7 @@ class BarChart extends PureComponent<Props, State> {
   public render() {
     const { width, height } = this.props
 
-    return (
-      <canvas ref={this.canvas} width={width} height={height} />
-    )
+    return <canvas ref={this.canvas} width={width} height={height} />
   }
 }
 
