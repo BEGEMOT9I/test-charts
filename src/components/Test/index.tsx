@@ -28,8 +28,6 @@ class Test extends PureComponent<Props, State> {
     this.startStage()
   }
 
-
-
   private async startStage() {
     const { width, height } = this.props
     const { subStageIndex, stageIndex } = this.state

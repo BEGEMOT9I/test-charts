@@ -1,5 +1,4 @@
-import React, { PureComponent } from 'react'
-import ReactEchartsCore from 'echarts-for-react/lib/core'
+import React, { PureComponent, createRef } from 'react'
 import echarts from 'echarts/lib/echarts'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
@@ -19,6 +18,7 @@ interface State { }
 
 class LineChart extends PureComponent<Props, State> {
   public static displayName = 'LineChart'
+  private canvas = createRef<HTMLCanvasElement>()
 
   constructor(props: Props) {
     super(props)
@@ -26,40 +26,41 @@ class LineChart extends PureComponent<Props, State> {
     props.onStartedRendering()
   }
 
+  componentDidMount() {
+    const { dataset, onFinishedRendering } = this.props
+    const chart = echarts.init(this.canvas.current)
+
+    chart.on('finished', onFinishedRendering)
+    chart.setOption({
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        type: 'scroll'
+      },
+      grid: {
+        top: 60,
+        left: 40,
+        right: 60,
+        bottom: 30
+      },
+      xAxis: [
+        { type: 'category' },
+      ],
+      yAxis: {},
+      dataset: {
+        source: dataset
+      },
+      series: dataset.slice(1, dataset.length).map(() => ({ type: 'line', seriesLayoutBy: 'row' })),
+      animation: false
+    })
+  }
+
   public render() {
-    const { width, height, dataset, onFinishedRendering } = this.props
+    const { width, height } = this.props
 
     return (
-      <ReactEchartsCore
-        echarts={echarts}
-        style={{ width, height }}
-        option={{
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            type: 'scroll'
-          },
-          grid: {
-            top: 60,
-            left: 40,
-            right: 60,
-            bottom: 30
-          },
-          xAxis: [
-            { type: 'category' },
-          ],
-          yAxis: {},
-          dataset: {
-            source: dataset
-          },
-          series: dataset.slice(1, dataset.length).map(() => ({ type: 'line', seriesLayoutBy: 'row' })),
-          animation: false
-        }}
-        onEvents={{
-          finished: onFinishedRendering
-        }}
-      />
+      <canvas ref={this.canvas} width={width} height={height} style={{ width: `${width}px`, height: `${height}px` }}/>
     )
   }
 }
