@@ -16,14 +16,14 @@ const STAGES_OPTIONS = [
 ]
 
 const STAGES = [
-  // {
-  //   element: LineChart,
-  //   substages: STAGES_OPTIONS
-  // },
-  // {
-  //   element: BarChart,
-  //   substages: STAGES_OPTIONS
-  // }
+  {
+    element: LineChart,
+    substages: STAGES_OPTIONS
+  },
+  {
+    element: BarChart,
+    substages: STAGES_OPTIONS
+  },
   {
     element: PieChart,
     substages: STAGES_OPTIONS.filter(
