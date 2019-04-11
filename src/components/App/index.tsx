@@ -31,7 +31,7 @@ class App extends PureComponent<Props, State> {
 
     return (
       <div id="chart" style={{ overflow: 'hidden', marginTop: 20 }}>
-        <Test width={width} height={height} />
+        <Test width={width} height={height}/>
       </div>
     )
   }

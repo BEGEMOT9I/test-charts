@@ -1,4 +1,4 @@
-export default function(count: number): Array<string> {
+export default function (count: number): Array<string> {
   const labels = []
   let begin = new Date(2019, 0, 1).getTime()
 

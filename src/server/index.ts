@@ -2,13 +2,7 @@ import * as express from 'express'
 import * as path from 'path'
 import * as bodyParser from 'body-parser'
 
-import {
-  viewController,
-  testController,
-  nestedDataController,
-  flatDatasetWithoutLabelsController,
-  flatDatasetWithLabelsController
-} from './controllers'
+import { viewController, testController, nestedDataController, flatDatasetWithoutLabelsController, flatDatasetWithLabelsController } from './controllers'
 
 const app = express()
 

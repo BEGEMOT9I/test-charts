@@ -1,33 +1,18 @@
 import getDataLabels from '../getDataLabels'
 import { FlatDatasetWithLabels } from './index'
 
-function createNestedSeria(
-  dataset: Array<Array<number | string>>,
-  parentArray: Array<number | string>,
-  levelsDataCount: Array<number>,
-  level: number
-) {
+function createNestedSeria(dataset: Array<Array<number | string>>, parentArray: Array<number | string>, levelsDataCount: Array<number>, level: number) {
   const levelDataCount = levelsDataCount[level]
 
   if (level) {
     for (let i = 0; i < levelDataCount; i += 1) {
-      createNestedSeria(
-        dataset,
-        [...parentArray, `level-${level}-index-${i}`],
-        levelsDataCount,
-        level - 1
-      )
+      createNestedSeria(dataset, [...parentArray, `level-${level}-index-${i}`], levelsDataCount, level - 1)
     }
   } else {
-    const valueBasedOnParentArray = (parentArray as Array<string>).reduce(
-      (result, label, labelIndex) => {
-        const index =
-          Number((label.match(/(index|seria)-(\d+)$/) as Array<string>)[2]) *
-          10 ** (parentArray.length - labelIndex)
-        return result + index
-      },
-      0
-    )
+    const valueBasedOnParentArray = (parentArray as Array<string>).reduce((result, label, labelIndex) => {
+      const index = Number((label.match(/(index|seria)-(\d+)$/) as Array<string>)[2]) * 10 ** (parentArray.length - labelIndex)
+      return result + index
+    }, 0)
 
     for (let i = 0; i < levelDataCount; i += 1) {
       parentArray.push(Math.abs(Math.sin(valueBasedOnParentArray + i)))
@@ -36,13 +21,10 @@ function createNestedSeria(
   }
 }
 
-export default function(
-  seriesCount: number,
-  levelsDataCount: Array<number>
-): FlatDatasetWithLabels<number, string> {
+export default function (seriesCount: number, levelsDataCount: Array<number>): FlatDatasetWithLabels<number, string> {
   const dataset: Array<Array<number | string>> = []
 
-  let labels = ['Series']
+  let labels = ["Series"]
 
   for (let level = levelsDataCount.length - 1; level > 0; level -= 1) {
     labels.push(`level-${level}`)

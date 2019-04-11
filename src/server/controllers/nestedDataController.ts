@@ -1,18 +1,11 @@
 import * as express from 'express'
 
-import {
-  getLevels,
-  getSeries,
-  getIncapsulatedDataset,
-  Result,
-  IncapsulatedDataset
-} from '../utils/resultStructure'
+import { getLevels, getSeries, getIncapsulatedDataset, Result, IncapsulatedDataset } from '../utils/resultStructure'
 
 function nestedDataController(req: express.Request, res: express.Response) {
   try {
     const {
-      seriesCount = 1,
-      levelsDataCount = [1, 1]
+      seriesCount = 1, levelsDataCount = [1, 1]
     }: {
       seriesCount: number
       levelsDataCount: number[]
