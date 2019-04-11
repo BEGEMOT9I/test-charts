@@ -14,7 +14,7 @@ interface Props {
   onStartedRendering: () => void
   onFinishedRendering: () => void
 }
-interface State { }
+interface State {}
 
 class PieChart extends PureComponent<Props, State> {
   public static displayName = 'PieChart'
@@ -41,10 +41,12 @@ class PieChart extends PureComponent<Props, State> {
           },
           legend: {
             type: 'scroll',
-            data: dataset.length ? dataset[0].map(label => ({
-              name: label,
-              icon: 'circle'
-            })) : []
+            data: dataset.length
+              ? dataset[0].map(label => ({
+                  name: label,
+                  icon: 'circle'
+                }))
+              : []
           },
           series: dataset.slice(1, dataset.length).map((seria, index) => ({
             name: seria[0],

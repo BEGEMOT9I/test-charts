@@ -15,7 +15,7 @@ interface Props {
   onStartedRendering: () => void
   onFinishedRendering: () => void
 }
-interface State { }
+interface State {}
 
 class BarChart extends PureComponent<Props, State> {
   public static displayName = 'BarChart'
@@ -46,14 +46,14 @@ class BarChart extends PureComponent<Props, State> {
             right: 60,
             bottom: 30
           },
-          xAxis: [
-            { type: 'category' },
-          ],
+          xAxis: [{ type: 'category' }],
           yAxis: {},
           dataset: {
             source: dataset
           },
-          series: dataset.slice(1, dataset.length).map(() => ({ type: 'bar', seriesLayoutBy: 'row' })),
+          series: dataset
+            .slice(1, dataset.length)
+            .map(() => ({ type: 'bar', seriesLayoutBy: 'row' })),
           animation: false
         }}
         onEvents={{

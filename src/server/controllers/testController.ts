@@ -7,7 +7,7 @@ async function testController(req: express.Request, res: express.Response) {
     const response = await fetch(`${req.protocol}://${req.hostname}:3000/${pathToTest}`, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

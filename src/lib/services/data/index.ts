@@ -1,4 +1,3 @@
-
 import { ENDPOINT } from '../../constants/api'
 
 interface Level {
@@ -25,12 +24,12 @@ class DataService {
       const response = await fetch(`${location.origin}/${ENDPOINT.DATASET}`, {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(options)
       })
-      return this.format2DDataset(await response.json() as BasedData)
+      return this.format2DDataset((await response.json()) as BasedData)
     } catch (error) {
       console.error(error)
       return []
@@ -44,7 +43,7 @@ class DataService {
     dataset.push(header)
 
     data.dataset.forEach((values, valuesIndex) => {
-      const seria: Array<string | number> = [data.series[Math.floor(valuesIndex / data.dataset.length * data.series.length)].name]
+      const seria: Array<string | number> = [data.series[valuesIndex].name]
 
       data.levels.slice(0, data.levels.length - 1).forEach((level, levelIndex) => {
         const levelLabel = level.labels[valuesIndex % level.labels.length]
