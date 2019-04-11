@@ -1,4 +1,4 @@
-# __name__ library testing.
+# Echarts library testing.
 
 ## List of the charts:
 - Line
@@ -6,4 +6,4 @@
 - Pie
 
 ## List of datasets formats:
-See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/__name__/blob/echarts/src/lib/constants/testing.tsx).
+See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/echarts/src/lib/constants/testing.tsx).
