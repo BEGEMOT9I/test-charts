@@ -1,9 +1,5 @@
-import React, { PureComponent } from 'react'
-import ReactEchartsCore from 'echarts-for-react/lib/core'
-import echarts from 'echarts/lib/echarts'
-import 'echarts/lib/chart/pie'
-import 'echarts/lib/component/tooltip'
-import 'echarts/lib/component/legendScroll'
+import React, { PureComponent, createRef } from 'react'
+import Chart from 'chart.js'
 
 import { FormattedDataset } from '../../../lib/services/data'
 
@@ -18,6 +14,7 @@ interface State { }
 
 class PieChart extends PureComponent<Props, State> {
   public static displayName = 'PieChart'
+  private canvas = createRef<HTMLCanvasElement>()
 
   constructor(props: Props) {
     super(props)
@@ -25,45 +22,38 @@ class PieChart extends PureComponent<Props, State> {
     props.onStartedRendering()
   }
 
+  componentDidMount() {
+    const { dataset, onFinishedRendering } = this.props
+    const labels = dataset.length ? dataset[0].slice(1, dataset[0].length) as Array<string> : []
+    const colors = labels.map(() => `#${Math.random().toString(16).substr(-6)}`)
+    const chart = new Chart(this.canvas.current, {
+      type: 'pie',
+      data: {
+        labels,
+        datasets: dataset.slice(1, dataset.length).map((seria) => {
+          return {
+            label: seria[0] as string,
+            data: seria.slice(1, seria.length) as Array<number>,
+            backgroundColor: colors,
+            borderColor: colors,
+            fill: false
+          }
+        })
+      },
+      options: {
+        animation: {
+          duration: 0, // general animation time
+          onComplete: onFinishedRendering
+        },
+      }
+    })
+  }
+
   public render() {
-    const { width, height, dataset, onFinishedRendering } = this.props
-    const size = Math.min(width, height)
-    const padding = Math.max(size / (dataset.length - 1) * 0.1, 1)
-    const radius = (size / 2 - padding * (dataset.length - 2)) / (dataset.length - 1)
+    const { width, height } = this.props
 
     return (
-      <ReactEchartsCore
-        echarts={echarts}
-        style={{ width, height }}
-        option={{
-          tooltip: {
-            trigger: 'item'
-          },
-          legend: {
-            type: 'scroll',
-            data: dataset.length ? dataset[0].map(label => ({
-              name: label,
-              icon: 'circle'
-            })) : []
-          },
-          series: dataset.slice(1, dataset.length).map((seria, index) => ({
-            name: seria[0],
-            type: 'pie',
-            label: {
-              show: false
-            },
-            radius: [index * (padding + radius), index * (padding + radius) + radius],
-            data: seria.slice(1, seria.length).map((value, valueIndex, array) => ({
-              value,
-              name: dataset[0][dataset[0].length - array.length + valueIndex]
-            }))
-          })),
-          animation: false
-        }}
-        onEvents={{
-          finished: onFinishedRendering
-        }}
-      />
+      <canvas ref={this.canvas} width={width} height={height} />
     )
   }
 }
