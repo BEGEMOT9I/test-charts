@@ -5,7 +5,8 @@ import { getFlatDatasetWithLabels } from '../utils/resultStructure'
 function flatDatasetWithLabelsController(req: express.Request, res: express.Response) {
   try {
     const {
-      seriesCount = 1, levelsDataCount = [1, 1]
+      seriesCount = 1,
+      levelsDataCount = [1, 1]
     }: {
       seriesCount: number
       levelsDataCount: number[]

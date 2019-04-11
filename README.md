@@ -1,4 +1,4 @@
-# Chart.js library testing.
+# react-vis library testing.
 
 ## List of the charts:
 - Line
@@ -6,4 +6,4 @@
 - Pie
 
 ## List of datasets formats:
-See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/chart.js/src/lib/constants/testing.tsx).
+See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/react-vis/src/lib/constants/testing.tsx).
