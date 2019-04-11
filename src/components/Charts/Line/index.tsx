@@ -14,7 +14,7 @@ interface Props {
   onStartedRendering: () => void
   onFinishedRendering: () => void
 }
-interface State { }
+interface State {}
 
 class LineChart extends PureComponent<Props, State> {
   public static displayName = 'LineChart'
@@ -44,9 +44,7 @@ class LineChart extends PureComponent<Props, State> {
         right: 60,
         bottom: 30
       },
-      xAxis: [
-        { type: 'category' },
-      ],
+      xAxis: [{ type: 'category' }],
       yAxis: {},
       dataset: {
         source: dataset
@@ -60,7 +58,12 @@ class LineChart extends PureComponent<Props, State> {
     const { width, height } = this.props
 
     return (
-      <canvas ref={this.canvas} width={width} height={height} style={{ width: `${width}px`, height: `${height}px` }}/>
+      <canvas
+        ref={this.canvas}
+        width={width}
+        height={height}
+        style={{ width: `${width}px`, height: `${height}px` }}
+      />
     )
   }
 }

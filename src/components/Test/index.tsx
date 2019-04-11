@@ -36,8 +36,21 @@ class Test extends PureComponent<Props, State> {
     const dataset = await DataService.getDataset(stageOptions)
 
     this.setState({
-      timerName: `On rendered component "${ChartElement.displayName}" with dataset options:\n  - seriesCount = ${stageOptions.seriesCount}\n  - levelsDataCount = ${stageOptions.levelsDataCount}`,
-      element: <ChartElement key={`stage-${stageIndex}-substage-${subStageIndex}`} width={width} height={height} dataset={dataset} onStartedRendering={this.onStartedRendering} onFinishedRendering={this.onFinishedRendering}/>
+      timerName: `On rendered component "${
+        ChartElement.displayName
+      }" with dataset options:\n  - seriesCount = ${
+        stageOptions.seriesCount
+      }\n  - levelsDataCount = ${stageOptions.levelsDataCount}`,
+      element: (
+        <ChartElement
+          key={`stage-${stageIndex}-substage-${subStageIndex}`}
+          width={width}
+          height={height}
+          dataset={dataset}
+          onStartedRendering={this.onStartedRendering}
+          onFinishedRendering={this.onFinishedRendering}
+        />
+      )
     })
   }
 
@@ -64,10 +77,13 @@ class Test extends PureComponent<Props, State> {
     }
 
     if (nextSubStageIndex !== subStageIndex || nextStageIndex !== stageIndex) {
-      this.setState({
-        subStageIndex: nextSubStageIndex,
-        stageIndex: nextStageIndex
-      }, () => this.startStage())
+      this.setState(
+        {
+          subStageIndex: nextSubStageIndex,
+          stageIndex: nextStageIndex
+        },
+        () => this.startStage()
+      )
     }
   }
 

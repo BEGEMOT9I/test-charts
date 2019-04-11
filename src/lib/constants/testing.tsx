@@ -26,7 +26,9 @@ const STAGES = [
   },
   {
     element: PieChart,
-    substages: STAGES_OPTIONS.filter(options => options.levelsDataCount.every(count => count < 1000) && options.seriesCount < 1000)
+    substages: STAGES_OPTIONS.filter(
+      options => options.levelsDataCount.every(count => count < 1000) && options.seriesCount < 1000
+    )
   }
 ]
 
