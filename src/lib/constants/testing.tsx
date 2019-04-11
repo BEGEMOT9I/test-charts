@@ -12,7 +12,8 @@ const STAGES_OPTIONS = [
   { seriesCount: 100, levelsDataCount: [1] },
   { seriesCount: 300, levelsDataCount: [1] },
   { seriesCount: 100, levelsDataCount: [10] },
-  { seriesCount: 10, levelsDataCount: [100] }
+  { seriesCount: 10, levelsDataCount: [100] },
+  { seriesCount: 10, levelsDataCount: [1000] }
 ]
 
 const STAGES = [
