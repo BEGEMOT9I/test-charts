@@ -49,16 +49,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/d3-path@*":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@types/d3-path/-/d3-path-1.0.6.tgz#c1a7d2dc07b295fdd1c84dabe4404df991b48693"
-
-"@types/d3-shape@*":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@types/d3-shape/-/d3-shape-1.2.2.tgz#f8dcdff7772a7ae37858bf04abd43848a78e590e"
-  dependencies:
-    "@types/d3-path" "*"
-
 "@types/express-serve-static-core@*":
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.16.2.tgz#5ee8a22e602005be6767df6b2cba9879df3f75aa"
@@ -107,13 +97,6 @@
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.13.tgz#47d466462b774556c1174ea0eda22c0578643362"
   dependencies:
     csstype "^2.2.0"
-
-"@types/recharts@^1.0.18":
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.18.tgz#d5749ea4e47e175325a6526eb2caec619f181126"
-  dependencies:
-    "@types/d3-shape" "*"
-    "@types/react" "*"
 
 "@types/serve-static@*":
   version "1.13.2"

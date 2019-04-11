@@ -1,4 +1,4 @@
-# Echarts library testing.
+# Echarts (with adapter) library testing.
 
 ## List of the charts:
 - Line
