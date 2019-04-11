@@ -1,8 +1,9 @@
 # Testing charts libraries.
 
 ## List of included libs:
-- [x] Echarts (with React adapter)
-- [ ] Chart.js
+- [x] ECharts
+- [x] ECharts (with React adapter)
+- [X] Chart.js
 - [ ] tauCharts
 - [ ] react-vis (React)
 - [ ] Victory (React)
