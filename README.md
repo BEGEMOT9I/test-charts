@@ -4,8 +4,7 @@
 - [x] ECharts
 - [x] ECharts (with React adapter)
 - [X] Chart.js
-- [ ] tauCharts
-- [ ] react-vis (React)
+- [X] react-vis (React)
 - [ ] Victory (React)
 - [ ] AnyChart (with React adapter)
 - [ ] plotly.js (with React adapter)
