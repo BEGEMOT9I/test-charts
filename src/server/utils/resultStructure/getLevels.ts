@@ -1,7 +1,7 @@
 import getDataLabels from '../getDataLabels'
 import { Levels } from './index'
 
-export default function (levelsDataCount: Array<number>): Levels {
+export default function(levelsDataCount: Array<number>): Levels {
   const levels = []
 
   for (let level = levelsDataCount.length - 1; level > -1; level -= 1) {

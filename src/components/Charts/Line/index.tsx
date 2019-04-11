@@ -1,5 +1,15 @@
-import React, { PureComponent, createRef } from 'react'
-import Chart from 'chart.js'
+import React, { PureComponent, createRef, Fragment } from 'react'
+import {
+  XYPlot,
+  HorizontalGridLines,
+  VerticalGridLines,
+  XAxis,
+  YAxis,
+  LineSeries,
+  DiscreteColorLegend,
+  Crosshair
+} from 'react-vis'
+import 'react-vis/dist/style.css'
 
 import { FormattedDataset } from '../../../lib/services/data'
 
@@ -10,11 +20,18 @@ interface Props {
   onStartedRendering: () => void
   onFinishedRendering: () => void
 }
-interface State { }
+interface State {
+  nearestXValues: Array<{
+    x: string
+    y: number
+  }>
+}
 
 class LineChart extends PureComponent<Props, State> {
   public static displayName = 'LineChart'
-  private canvas = createRef<HTMLCanvasElement>()
+  public state: State = {
+    nearestXValues: []
+  }
 
   constructor(props: Props) {
     super(props)
@@ -23,38 +40,48 @@ class LineChart extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    const { dataset, onFinishedRendering } = this.props
-    const chart = new Chart(this.canvas.current, {
-      type: 'line',
-      data: {
-        labels: dataset.length ? dataset[0].slice(1, dataset[0].length) as Array<string> : [],
-        datasets: dataset.slice(1, dataset.length).map((seria) => {
-          const color = `#${Math.random()
-            .toString(16)
-            .substr(-6)}`
-          return {
-            label: seria[0] as string,
-            data: seria.slice(1, seria.length) as Array<number>,
-            backgroundColor: color,
-            borderColor: color,
-            fill: false
-          }
-        })
-      },
-      options: {
-        animation: {
-          duration: 0, // general animation time
-          onComplete: onFinishedRendering
-        },
-      }
+    this.props.onFinishedRendering()
+  }
+
+  private onNearestX = (value: Object, { index }: { index: number }) => {
+    const { dataset } = this.props
+
+    this.setState({
+      nearestXValues: dataset.slice(1, dataset.length).map(seria => ({
+        x: dataset[0][index + 1] as string,
+        y: seria[index + 1] as number
+      }))
     })
   }
 
+  private onMouseLeave = () => this.setState({ nearestXValues: [] })
+
   public render() {
-    const { width, height } = this.props
+    const { width, height, dataset } = this.props
+    const labels = dataset[0].slice(1, dataset[0].length)
 
     return (
-      <canvas ref={this.canvas} width={width} height={height} />
+      <Fragment>
+        <XYPlot onMouseLeave={this.onMouseLeave} xType="ordinal" width={width} height={height}>
+          <HorizontalGridLines style={{ stroke: '#B7E9ED' }} />
+          <VerticalGridLines style={{ stroke: '#B7E9ED' }} />
+          <XAxis />
+          <YAxis />
+          {dataset.slice(1, dataset.length).map(seria => {
+            return (
+              <LineSeries
+                key={seria[0]}
+                onNearestX={this.onNearestX}
+                data={seria
+                  .slice(1, seria.length)
+                  .map((yValue, index) => ({ x: labels[index], y: yValue }))}
+              />
+            )
+          })}
+          <Crosshair values={this.state.nearestXValues} />
+        </XYPlot>
+        <DiscreteColorLegend width={width} items={labels} orientation="horizontal" />
+      </Fragment>
     )
   }
 }
