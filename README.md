@@ -1,9 +1,9 @@
-# __name__ library testing.
+# Victory library testing.
 
 ## List of the charts:
 - Line
-- Bar
+- Bar (without tooltip)
 - Pie
 
 ## List of datasets formats:
-See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/__name__/blob/echarts/src/lib/constants/testing.tsx).
+See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/victory/src/lib/constants/testing.tsx).
