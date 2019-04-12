@@ -6,4 +6,4 @@
 - Pie
 
 ## List of datasets formats:
-See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/__name__/blob/echarts/src/lib/constants/testing.tsx).
+See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/src/lib/constants/testing.tsx).
