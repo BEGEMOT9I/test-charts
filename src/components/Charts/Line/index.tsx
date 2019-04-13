@@ -1,4 +1,9 @@
-import React, { PureComponent } from 'react'
+/// <reference types="anychart" />
+
+import React, { PureComponent, createRef } from 'react'
+import 'anychart/dist/js/anychart-base.min'
+import 'anychart/dist/js/anychart-exports.min'
+import 'anychart/dist/js/anychart-ui.min'
 
 import { FormattedDataset } from '../../../lib/services/data'
 
@@ -13,6 +18,7 @@ interface State {}
 
 class LineChart extends PureComponent<Props, State> {
   public static displayName = 'LineChart'
+  private element = createRef<HTMLDivElement>()
 
   constructor(props: Props) {
     super(props)
@@ -21,13 +27,17 @@ class LineChart extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.props.onFinishedRendering()
+    const { dataset, onFinishedRendering } = this.props
+    const chart = anychart.line()
+
+    chart.line(dataset.slice(1, dataset.length))
+    chart.container()
   }
 
   public render() {
     const { width, height } = this.props
 
-    return null
+    return <div id="container" style={{ width, height }} ref={this.element} />
   }
 }
 
