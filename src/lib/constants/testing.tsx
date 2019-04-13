@@ -19,17 +19,17 @@ const STAGES = [
   {
     element: LineChart,
     substages: STAGES_OPTIONS
+  },
+  {
+    element: BarChart,
+    substages: STAGES_OPTIONS
+  },
+  {
+    element: PieChart,
+    substages: STAGES_OPTIONS.filter(
+      options => options.levelsDataCount.every(count => count < 1000) && options.seriesCount < 1000
+    )
   }
-  // {
-  //   element: BarChart,
-  //   substages: STAGES_OPTIONS
-  // },
-  // {
-  //   element: PieChart,
-  //   substages: STAGES_OPTIONS.filter(
-  //     options => options.levelsDataCount.every(count => count < 1000) && options.seriesCount < 1000
-  //   )
-  // }
 ]
 
 export { STAGES, ELEMENTS, STAGES_OPTIONS }
