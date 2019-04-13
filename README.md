@@ -5,7 +5,7 @@
 - [x] ECharts (with React adapter)
 - [X] Chart.js
 - [X] react-vis (React)
-- [ ] Victory (React)
+- [X] Victory (React)
 - [ ] AnyChart (with React adapter)
 - [ ] plotly.js (with React adapter)
 - [ ] amCharts
