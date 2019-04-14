@@ -51,6 +51,8 @@
     "webpack-manifest-plugin": "^2.0.2"
   },
   "dependencies": {
+    "react-plotly.js": "2.3.0",
+    "plotly.js": "1.47.1",
     "node-fetch": "^2.3.0",
     "react": "16.3.2",
     "react-dom": "^16.3.2",
