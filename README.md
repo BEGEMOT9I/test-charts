@@ -10,7 +10,7 @@
 - [X] AnyChart (with React adapter)
 - [X] plotly.js
 - [X] plotly.js (with React adapter)
-- [ ] amCharts
+- [X] amCharts
 - [ ] c3
 - [ ] Highcharts (with React adapter)
 - [ ] TOAST UI Chart
