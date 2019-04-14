@@ -1,9 +1,9 @@
-# __name__ library testing.
+# AnyChart (with adapter) library testing.
 
 ## List of the charts:
 - Line
 - Bar
-- Pie
+- Pie (partially - only with one seria)
 
 ## List of datasets formats:
-See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/src/lib/constants/testing.tsx).
+See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/anychart-react/src/lib/constants/testing.tsx).
