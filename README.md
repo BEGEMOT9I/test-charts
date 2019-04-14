@@ -8,7 +8,8 @@
 - [X] Victory (React)
 - [X] AnyChart
 - [X] AnyChart (with React adapter)
-- [ ] plotly.js (with React adapter)
+- [X] plotly.js
+- [X] plotly.js (with React adapter)
 - [ ] amCharts
 - [ ] c3
 - [ ] Highcharts (with React adapter)
