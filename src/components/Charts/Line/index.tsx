@@ -44,6 +44,11 @@ class LineChart extends PureComponent<Props, State> {
       onFinishedRendering()
     })
     chart.data(chartDataSet)
+
+    for (let i = 0; i < chart.getSeriesCount(); i += 1) {
+      chart.getSeriesAt(i).name(dataset[i + 1][0] as string)
+    }
+
     chart.legend(true)
     chart.container(stage)
     chart.draw()
