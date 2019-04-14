@@ -38,7 +38,7 @@ class BarChart extends PureComponent<Props, State> {
           y: seria.slice(1, seria.length),
           name: seria[0]
         })),
-        {},
+        { showlegend: true },
         { displayModeBar: false }
       )
     } finally {

@@ -43,7 +43,7 @@ class PieChart extends PureComponent<Props, State> {
           hole: index * (padding + radius),
           textinfo: 'none'
         })),
-        {},
+        { showlegend: true },
         { displayModeBar: false }
       )
     } finally {
