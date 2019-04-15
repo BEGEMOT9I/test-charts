@@ -8,6 +8,14 @@ interface Props {
   height: number
 }
 interface State {
+  result: Array<{
+    componentName: string
+    stageOptions: {
+      seriesCount: number
+      levelsDataCount: Array<number>
+    }
+    time: number
+  }>
   timerName?: string
   element?: JSX.Element
   subStageIndex: number
@@ -15,7 +23,9 @@ interface State {
 }
 
 class Test extends PureComponent<Props, State> {
+  private startTime: Date
   state: State = {
+    result: [],
     subStageIndex: 0,
     stageIndex: 0
   }
@@ -55,14 +65,21 @@ class Test extends PureComponent<Props, State> {
   }
 
   public onStartedRendering = () => {
-    console.time(this.state.timerName)
+    this.startTime = new Date()
+    // console.time(this.state.timerName)
   }
 
   public onFinishedRendering = () => {
-    console.timeEnd(this.state.timerName)
+    // console.timeEnd(this.state.timerName)
+    const time = new Date().getTime() - this.startTime.getTime()
 
-    const { subStageIndex, stageIndex } = this.state
+    const { subStageIndex, stageIndex, result } = this.state
     const { substages } = STAGES[stageIndex]
+    const nextResult: State['result'] = result.concat({
+      componentName: STAGES[stageIndex].element.displayName,
+      stageOptions: substages[subStageIndex],
+      time
+    })
 
     let nextSubStageIndex = subStageIndex
     let nextStageIndex = stageIndex
@@ -79,12 +96,63 @@ class Test extends PureComponent<Props, State> {
     if (nextSubStageIndex !== subStageIndex || nextStageIndex !== stageIndex) {
       this.setState(
         {
+          result: nextResult,
           subStageIndex: nextSubStageIndex,
           stageIndex: nextStageIndex
         },
         () => this.startStage()
       )
+    } else {
+      this.setState(
+        {
+          result: nextResult
+        },
+        this.showResult
+      )
     }
+  }
+
+  private showResult() {
+    const { result } = this.state
+    const componentsNames = STAGES.reduce((result, stage) => {
+      if (!result.includes(stage.element.displayName)) {
+        result.push(stage.element.displayName)
+      }
+
+      return result
+    }, [])
+
+    const header = ['Options', ...componentsNames]
+    const splitter = header
+      .map(name => '-')
+      .join(' | ')
+      .concat('\n')
+    const table: Array<Array<string | undefined>> = []
+
+    result.slice(1, result.length).forEach((resultInfo, index) => {
+      const elementIndex = header.indexOf(resultInfo.componentName)
+      const optionsCell = `Series: ${resultInfo.stageOptions.seriesCount}; Levels: [${
+        resultInfo.stageOptions.levelsDataCount
+      }]`
+      const existedRow = table.find(row => row[0] === optionsCell)
+
+      if (existedRow) {
+        existedRow[elementIndex] = `${resultInfo.time}ms`
+      } else {
+        const row = header.map(item => undefined)
+
+        row[0] = optionsCell
+        row[elementIndex] = `${resultInfo.time}ms`
+        table.push(row)
+      }
+    })
+
+    console.log(
+      header
+        .join(' | ')
+        .concat(`\n${splitter}`)
+        .concat(table.map(row => row.map(item => item || '-').join(' | ')).join('\n'))
+    )
   }
 
   render() {
