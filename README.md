@@ -11,7 +11,7 @@
 - [X] plotly.js
 - [X] plotly.js (with React adapter)
 - [X] amCharts
-- [ ] c3
+- [X] c3
 - [ ] Highcharts (with React adapter)
 - [ ] TOAST UI Chart
 - [ ] Plottable
