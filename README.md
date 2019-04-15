@@ -10,4 +10,4 @@ See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/sr
 
 ## Result
 Options | LineChart | BarChart | PieChart
-- | - | - | -
+| - | - | - | - |
