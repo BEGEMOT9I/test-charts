@@ -8,7 +8,7 @@
 ## List of datasets formats:
 See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/src/lib/constants/testing.tsx).
 
-## Result
+## Result:
 Options | LineChart | BarChart | PieChart
 | - | - | - | - |
 Series: 1; Levels: [1] | 56ms | 41ms | 55ms
