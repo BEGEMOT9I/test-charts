@@ -1,9 +1,9 @@
-# __name__ library testing.
+# c3 library testing.
 
 ## List of the charts:
 - Line
 - Bar
-- Pie
+- Pie (partially)
 
 ## List of datasets formats:
-See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/src/lib/constants/testing.tsx).
+See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/c3/src/lib/constants/testing.tsx).
