@@ -150,7 +150,7 @@ class Test extends PureComponent<Props, State> {
     console.log(
       header
         .join(' | ')
-        .concat(`\n${splitter}`)
+        .concat(`\n| ${splitter} |`)
         .concat(table.map(row => row.map(item => item || '-').join(' | ')).join('\n'))
     )
   }
