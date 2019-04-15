@@ -10,7 +10,7 @@ See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/sr
 
 ## Result
 Options | LineChart | BarChart | PieChart
-- | - | - | -
+| - | - | - | - |
 Series: 1; Levels: [1] | 9ms | 5ms | 5ms
 Series: 1; Levels: [100] | 22ms | 10ms | 73ms
 Series: 1; Levels: [1000] | 20ms | 51ms | -
