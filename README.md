@@ -10,9 +10,9 @@ All charts are rendered with default series names.
 ## List of datasets formats:
 See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/src/lib/constants/testing.tsx).
 
-## Result
+## Result:
 Options | LineChart | BarChart | PieChart
-- | - | - | -
+| - | - | - | - |
 Series: 1; Levels: [1] | 60ms | 34ms | 12ms
 Series: 1; Levels: [100] | 140ms | 124ms | 116ms
 Series: 1; Levels: [1000] | 175ms | 269ms | -
