@@ -1,6 +1,5 @@
 import React, { PureComponent, createRef } from 'react'
 import Highcharts from 'highcharts'
-import Data from 'highcharts/modules/data'
 
 import { FormattedDataset } from '../../../lib/services/data'
 
@@ -12,8 +11,6 @@ interface Props {
   onFinishedRendering: () => void
 }
 interface State {}
-
-Data(Highcharts)
 
 class PieChart extends PureComponent<Props, State> {
   public static displayName = 'PieChart'
