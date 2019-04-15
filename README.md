@@ -14,8 +14,6 @@
 - [X] c3
 - [X] Highcharts
 - [X] Highcharts (with React adapter)
-- [ ] TOAST UI Chart
-- [ ] Plottable
 
 ## Local testing:
 - `git checkout <library name>`
