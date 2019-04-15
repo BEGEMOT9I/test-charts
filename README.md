@@ -1,4 +1,4 @@
-# __name__ library testing.
+# Highcharts library testing.
 
 ## List of the charts:
 - Line
@@ -6,4 +6,4 @@
 - Pie
 
 ## List of datasets formats:
-See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/__name__/src/lib/constants/testing.tsx).
+See [`STAGES_OPTIONS`](https://github.com/BEGEMOT9I/test-charts/blob/highcharts/src/lib/constants/testing.tsx).
