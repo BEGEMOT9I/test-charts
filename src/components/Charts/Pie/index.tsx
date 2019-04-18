@@ -17,7 +17,7 @@ interface State {}
 
 class PieChart extends PureComponent<Props, State> {
   public static displayName = 'PieChart'
-  private canvas = createRef<HTMLCanvasElement>()
+  private element = createRef<HTMLDivElement>()
 
   constructor(props: Props) {
     super(props)
@@ -27,7 +27,7 @@ class PieChart extends PureComponent<Props, State> {
 
   componentDidMount() {
     const { width, height, dataset, onFinishedRendering } = this.props
-    const chart = echarts.init(this.canvas.current)
+    const chart = echarts.init(this.element.current)
     const size = Math.min(width, height)
     const padding = Math.max(size / (dataset.length - 1) * 0.1, 1)
     const radius = (size / 2 - padding * (dataset.length - 2)) / (dataset.length - 1)
@@ -68,14 +68,7 @@ class PieChart extends PureComponent<Props, State> {
   public render() {
     const { width, height } = this.props
 
-    return (
-      <canvas
-        ref={this.canvas}
-        width={width}
-        height={height}
-        style={{ width: `${width}px`, height: `${height}px` }}
-      />
-    )
+    return <div ref={this.element} style={{ width, height }} />
   }
 }
 

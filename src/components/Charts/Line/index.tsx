@@ -18,7 +18,7 @@ interface State {}
 
 class LineChart extends PureComponent<Props, State> {
   public static displayName = 'LineChart'
-  private canvas = createRef<HTMLCanvasElement>()
+  private element = createRef<HTMLDivElement>()
 
   constructor(props: Props) {
     super(props)
@@ -28,7 +28,7 @@ class LineChart extends PureComponent<Props, State> {
 
   componentDidMount() {
     const { dataset, onFinishedRendering } = this.props
-    const chart = echarts.init(this.canvas.current)
+    const chart = echarts.init(this.element.current)
 
     chart.on('finished', onFinishedRendering)
     chart.setOption({
@@ -57,14 +57,7 @@ class LineChart extends PureComponent<Props, State> {
   public render() {
     const { width, height } = this.props
 
-    return (
-      <canvas
-        ref={this.canvas}
-        width={width}
-        height={height}
-        style={{ width: `${width}px`, height: `${height}px` }}
-      />
-    )
+    return <div ref={this.element} style={{ width, height }} />
   }
 }
 
