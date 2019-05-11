@@ -1,3 +1,4 @@
+import { getItemInfoByName } from './getName'
 import { Series, Levels, FlatDatasetWithoutLabels } from './index'
 
 function createNestedSeria(
@@ -7,9 +8,11 @@ function createNestedSeria(
   level: number,
   seria: Array<number>
 ) {
-  if (level) {
-    levels[levels.length - level - 1].labels.forEach((label, index) =>
-      createNestedSeria(dataset, series, levels, level - 1, seria.concat(index))
+  const levelConfig = levels[level]
+
+  if (level < levels.length - 1) {
+    levelConfig.labels.forEach((label, index) =>
+      createNestedSeria(dataset, series, levels, level + 1, seria.concat(index))
     )
     return
   }
@@ -19,9 +22,7 @@ function createNestedSeria(
       const label = levelOrSeriaIndex
         ? levels[levelOrSeriaIndex - 1].labels[levelOrSeriaDataIndex]
         : series[levelOrSeriaDataIndex].name
-      const index =
-        Number((label.match(/(index|seria)-(\d+)$/) as Array<string>)[2]) *
-        10 ** (seria.length - levelOrSeriaIndex)
+      const index = getItemInfoByName(label) * 10 ** (seria.length - levelOrSeriaIndex)
 
       return result + index
     },
@@ -29,15 +30,15 @@ function createNestedSeria(
   )
 
   dataset.push(
-    levels[level].labels.map((label, index) => Math.abs(Math.sin(valueBasedOnParentArray + index)))
+    levelConfig.labels.map((label, index) => Math.abs(Math.sin(valueBasedOnParentArray + index)))
   )
 }
 
-export default function(series: Series, levels: Levels): FlatDatasetWithoutLabels<number> {
+export default function getData(series: Series, levels: Levels): FlatDatasetWithoutLabels<number> {
   const dataset: FlatDatasetWithoutLabels<number> = []
 
   series.forEach((seria, index) => {
-    createNestedSeria(dataset, series, levels, levels.length - 1, [index])
+    createNestedSeria(dataset, series, levels, 0, [index])
   })
 
   return dataset

@@ -1,3 +1,4 @@
+import { getSeriaName, getLevelName, getLevelDataItem, getItemInfoByName } from './getName'
 import getDataLabels from '../getDataLabels'
 import { FlatDatasetWithLabels } from './index'
 
@@ -13,7 +14,7 @@ function createNestedSeria(
     for (let i = 0; i < levelDataCount; i += 1) {
       createNestedSeria(
         dataset,
-        [...parentArray, `level-${level}-index-${i}`],
+        [...parentArray, getLevelDataItem(level, i)],
         levelsDataCount,
         level - 1
       )
@@ -21,9 +22,7 @@ function createNestedSeria(
   } else {
     const valueBasedOnParentArray = (parentArray as Array<string>).reduce(
       (result, label, labelIndex) => {
-        const index =
-          Number((label.match(/(index|seria)-(\d+)$/) as Array<string>)[2]) *
-          10 ** (parentArray.length - labelIndex)
+        const index = getItemInfoByName(label) * 10 ** (parentArray.length - labelIndex)
         return result + index
       },
       0
@@ -36,7 +35,7 @@ function createNestedSeria(
   }
 }
 
-export default function(
+export default function getData(
   seriesCount: number,
   levelsDataCount: Array<number>
 ): FlatDatasetWithLabels<number, string> {
@@ -45,14 +44,14 @@ export default function(
   let labels = ['Series']
 
   for (let level = levelsDataCount.length - 1; level > 0; level -= 1) {
-    labels.push(`level-${level}`)
+    labels.push(getLevelName(level))
   }
 
   labels = labels.concat(getDataLabels(levelsDataCount[0]))
   dataset.push(labels)
 
   for (let i = 0; i < seriesCount; i += 1) {
-    createNestedSeria(dataset, [`seria-${i}`], levelsDataCount, levelsDataCount.length - 1)
+    createNestedSeria(dataset, [getSeriaName(i)], levelsDataCount, levelsDataCount.length - 1)
   }
 
   return dataset
